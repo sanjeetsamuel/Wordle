@@ -35,6 +35,11 @@ async function main() {
         } else {
             console.log(`Nope`);
             for (let i = 0; i < word.length; i++) {
+                if(word.includes(input[i]) && input[i] != word[i])
+                    console.log("Letter is in the word: " ,input[i]);
+            }
+
+            for (let i = 0; i < word.length; i++) {
                 if(input[i] == word[i])
                     console.log("Letter at this position is corect: " ,i);
             }
