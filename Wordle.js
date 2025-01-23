@@ -16,7 +16,7 @@ async function get_word() {
 // Main function to save the word as a variable
 async function main() {
     const word = await get_word(); // Wait for get_word() to resolve
-    console.log("Random Word:", word); // Use the word
+    console.log("Real Word:", word); // Use the word
     // Now you can use the variable 'word' as needed
     
     const rl = require('readline').createInterface({
@@ -46,6 +46,10 @@ async function main() {
         }
     });
 }
+
+console.log("Welcome to Wordle!");
+console.log("Enter a 5 letter word: ");
+
 
 main(); // Call the main function
 
