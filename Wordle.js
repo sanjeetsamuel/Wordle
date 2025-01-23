@@ -25,10 +25,12 @@ async function main() {
     });
 
     rl.on('line', (input) => {
-        if (input === word) {
+        if (input.length != 5){
+            console.log('Please enter a 5 letter word');
+
+        } else if (input === word) {
             console.log('U got it!');
             rl.close(); // Exit the prompt
-        } if (condition) {
             
         } else {
             console.log(`Nope`);
