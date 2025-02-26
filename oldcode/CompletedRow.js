@@ -5,7 +5,7 @@ import Tile from "./Tile";
  * Supposed to represent single row on the board
  */
 
-const WordleRow = ({letters}) => {
+const CompletedRow = ({letters}) => {
     return (
         <div>
             {letters.map((l, index) => (
@@ -15,4 +15,4 @@ const WordleRow = ({letters}) => {
     );
 }
 
-export default WordleRow;
+export default CompletedRow;

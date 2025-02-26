@@ -1,0 +1,7 @@
+.div {
+    border: 20px;
+    border-color: red;
+    flex: auto;
+    justify-items: center;
+    margin-top: 50px;
+}

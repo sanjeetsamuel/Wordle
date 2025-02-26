@@ -1,10 +1,10 @@
 import React from "react";
-import WorldeBoard from "./components/WordleBoard";
+import Game from "./components/Game";
 
 const App = () => {
   return(
     <div>
-      <WorldeBoard />
+      <Game />
     </div>
   );
 }
