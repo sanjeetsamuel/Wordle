@@ -1,18 +1,29 @@
-.board {
+body {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: white;
-  color:black;
   justify-content: center;
   align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: white; /* Optional background */
 }
+
+.keyboard-container {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
 
 .row {
   display: flex;
   gap: 5px;
   background-color: white;
   color:black;
+  justify-content: center;
+  align-items: center;
 }
 
 .tile {
@@ -45,4 +56,40 @@
 .absent {
   background-color: #3a3a3c;
   color:white;
+}
+
+
+.keyboard-row {
+  display: flex;
+  justify-content: center; /* Center the keys horizontally in each row */
+  margin-bottom: 10px; /* Add some spacing between rows */
+}
+
+.key {
+  margin: 5px; /* Space between keys */
+  padding: 10px 15px;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+}
+
+.key:disabled {
+  background-color: #d3d3d3;
+  cursor: not-allowed;
+}
+
+/* You can keep your color classes here as well */
+.key.correct {
+  background-color: #538d4e;
+  color: white;
+}
+
+.key.present {
+  background-color: #b59f3b;
+  color: white;
+}
+
+.key.absent {
+  background-color: #3a3a3c;
+  color: white;
 }

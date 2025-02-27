@@ -1,29 +1,28 @@
 import React, { useState } from "react";
 import Row from './Row';  
+import VirtualKeyboard from './VirtualKeyboard';  // Import the virtual keyboard
 import "../index.css";
 
 const Board = () => {
     const [storedGuesses, setGuesses] = useState(
-        Array(6).fill().map(() => Array(5).fill(["", ""])) // 6 rows, 5 columns of empty guesses
+        Array(6).fill().map(() => Array(5).fill(["", ""])) 
     );
-    const [activeRow, setActiveRow] = useState(0); // Active row to edit
-    const targetWord = ['H', 'E', 'L', 'L', 'O']; // Target word
+    const [activeRow, setActiveRow] = useState(0); 
+    const targetWord = ['H', 'E', 'L', 'L', 'O']; 
+    const [isGameOver, setIsGameOver] = useState(false); // Track if the game is over
+    const [guessedLetters, setGuessedLetters] = useState({}); // Track the status of guessed letters
 
-    // Handle letter input in a specific slot
     const handleInput = (letter, index) => {
         const newGuesses = [...storedGuesses];
-        newGuesses[activeRow][index] = [letter, ""]; // Update the letter and reset status
-        setGuesses(newGuesses);
+        newGuesses[activeRow][index] = [letter, ""]; 
+        setGuesses(newGuesses); 
     };
 
-    // Handle submitting the current guess
     const handleSubmit = () => {
         const currentGuess = storedGuesses[activeRow].map(([letter]) => letter);
         
-        // If the guess is incomplete, do nothing
         if (currentGuess.some((letter) => letter === "")) return;
 
-        // Check the guess against the target word and update status
         const updatedStatus = currentGuess.map((letter, index) => {
             if (letter === targetWord[index]) return "correct";  
             if (targetWord.includes(letter)) return "present";  
@@ -32,11 +31,24 @@ const Board = () => {
 
         const newGuesses = [...storedGuesses];
         newGuesses[activeRow] = newGuesses[activeRow].map((_, index) => [currentGuess[index], updatedStatus[index]]);
-        setGuesses(newGuesses);
+        setGuesses(newGuesses); 
 
-        // Move to the next row or stop if no more rows
-        if (activeRow < 5) {
-            setActiveRow(activeRow + 1); 
+        // Update the guessedLetters state
+        const newGuessedLetters = { ...guessedLetters };
+        currentGuess.forEach((letter, index) => {
+            if (updatedStatus[index]) {
+                newGuessedLetters[letter] = updatedStatus[index];
+            }
+        });
+        setGuessedLetters(newGuessedLetters);
+
+        // Check if the current guess is correct
+        if (currentGuess.join('') === targetWord.join('')) {
+            setIsGameOver(true); // End the game if the word is guessed correctly
+        } else if (activeRow === 5) {
+            setIsGameOver(true); // Game over after 6 attempts
+        } else {
+            setActiveRow(activeRow + 1); // Move to the next row if not correct
         }
     };
 
@@ -47,11 +59,17 @@ const Board = () => {
                     key={index} 
                     guess={guess} 
                     targetWord={targetWord} 
-                    isActive={index === activeRow}  // Ensure this is set to true for the active row
+                    isActive={index === activeRow} 
                     onInput={handleInput} 
                     onSubmit={handleSubmit} 
+                    isGameOver={isGameOver}  // Pass the game-over flag to Row
                 />
             ))}
+            <VirtualKeyboard 
+                guessedLetters={guessedLetters} // Pass guessed letters state
+                onClick={handleInput} 
+                isGameOver={isGameOver} 
+            /> {/* Add the virtual keyboard */}
         </div>
     );
 };

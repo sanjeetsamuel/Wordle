@@ -9,5 +9,4 @@ const Tile = ({ letter, status }) => {
     );
 };
 
-
 export default Tile;
