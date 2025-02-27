@@ -1,10 +1,10 @@
 import React from "react";
-import Game from "./components/Game";
+import Board from "./components/Board";
 
 const App = () => {
   return(
     <div>
-      <Game />
+      <Board />
     </div>
   );
 }
